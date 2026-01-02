@@ -1,0 +1,9 @@
+dist
+node_modules
+.storybook-static
+*.log
+
+# Ignore Files from Shadcn UI
+**/use-mobile.ts
+**/base/**.tsx
+!**/base/**.stories.tsx
