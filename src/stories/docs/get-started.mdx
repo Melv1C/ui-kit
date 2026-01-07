@@ -1,0 +1,178 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/Get Started" />
+
+# Get Started
+
+## Créer ta première application
+
+Voici un guide rapide pour créer une application simple avec `@melv1c/ui-kit`.
+
+### Exemple basique
+
+```tsx
+import { Button, Card } from "@melv1c/ui-kit";
+import { useState } from "react";
+
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div className="min-h-screen bg-gray-50 p-8">
+      <Card className="max-w-md">
+        <Card.Header>
+          <Card.Title>Bienvenue</Card.Title>
+          <Card.Description>
+            Ceci est ta première utilisation de @melv1c/ui-kit
+          </Card.Description>
+        </Card.Header>
+
+        <Card.Content>
+          <p className="text-gray-600">
+            Clique sur le bouton pour incrémenter le compteur
+          </p>
+          <p className="mt-4 text-3xl font-bold">{count}</p>
+        </Card.Content>
+
+        <Card.Footer>
+          <Button onClick={() => setCount(count + 1)}>Incrémenter</Button>
+        </Card.Footer>
+      </Card>
+    </div>
+  );
+}
+```
+
+---
+
+## Composants principaux
+
+Les composants les plus utilisés :
+
+### Button
+
+```tsx
+import { Button } from "@melv1c/ui-kit";
+
+export default function ButtonExample() {
+  return (
+    <div className="flex gap-2">
+      <Button>Default</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="destructive">Destructive</Button>
+      <Button variant="outline">Outline</Button>
+      <Button disabled>Disabled</Button>
+    </div>
+  );
+}
+```
+
+### Card
+
+```tsx
+import { Card } from "@melv1c/ui-kit";
+
+export default function CardExample() {
+  return (
+    <Card>
+      <Card.Header>
+        <Card.Title>Card Title</Card.Title>
+      </Card.Header>
+      <Card.Content>Contenu de la card</Card.Content>
+      <Card.Footer>Footer optionnel</Card.Footer>
+    </Card>
+  );
+}
+```
+
+### Dialog / Modal
+
+```tsx
+import { Dialog, Button } from "@melv1c/ui-kit";
+import { useState } from "react";
+
+export default function DialogExample() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Ouvrir le Dialog</Button>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog.Content>
+          <Dialog.Header>
+            <Dialog.Title>Ceci est un Dialog</Dialog.Title>
+          </Dialog.Header>
+          <Dialog.Body>Le contenu du dialog</Dialog.Body>
+        </Dialog.Content>
+      </Dialog>
+    </>
+  );
+}
+```
+
+### Input & Form
+
+```tsx
+import { Input, Label, Button } from "@melv1c/ui-kit";
+import { useState } from "react";
+
+export default function FormExample() {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Email:", email);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="max-w-sm space-y-4">
+      <div>
+        <Label htmlFor="email">Email</Label>
+        <Input
+          id="email"
+          type="email"
+          placeholder="email@exemple.fr"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <Button type="submit">Soumettre</Button>
+    </form>
+  );
+}
+```
+
+---
+
+## Avec TypeScript
+
+Tous les composants sont **entièrement typés** :
+
+```tsx
+import { Button, ButtonProps } from "@melv1c/ui-kit";
+
+// Les props sont suggérées automatiquement
+const MyButton: React.FC<ButtonProps> = (props) => {
+  return <Button {...props} />;
+};
+```
+
+---
+
+## Composants disponibles
+
+Explore tous les composants disponibles dans la section **Components** de cette documentation. Chaque composant a :
+
+- ✅ Une démo interactive
+- ✅ Les props disponibles
+- ✅ Des exemples d'utilisation
+- ✅ Les variantes possibles
+
+---
+
+## Étapes suivantes
+
+- 🎨 [Theming](/?path=/docs/documentation-theming--docs) — Personnaliser les couleurs et les styles
+- 🌍 [Internationalisation](/?path=/docs/documentation-internationalisation--docs) — Ajouter le support multilingue
+- 📚 Explore les [Components](/?path=/story/) pour voir tous les composants disponibles

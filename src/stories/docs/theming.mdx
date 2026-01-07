@@ -1,0 +1,216 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/Theming" />
+
+# Theming
+
+Personnalise l'apparence de `@melv1c/ui-kit` pour matcher ta marque.
+
+## System de variables CSS
+
+Tous les composants utilisent des **variables CSS** pour les couleurs et les espacements. Cela permet une personnalisation facile et globale.
+
+### Variables principales
+
+```css
+/* Couleurs primaires */
+--primary: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+--primary-foreground: hsl(var(--primary-fg-h) var(--primary-fg-s) var(--primary-fg-l));
+
+/* Couleurs secondaires */
+--secondary: hsl(var(--secondary-h) var(--secondary-s) var(--secondary-l));
+--secondary-foreground: hsl(var(--secondary-fg-h) var(--secondary-fg-s) var(--secondary-fg-l));
+
+/* Destructive */
+--destructive: hsl(var(--destructive-h) var(--destructive-s) var(--destructive-l));
+--destructive-foreground: hsl(var(--destructive-fg-h) var(--destructive-fg-s) var(--destructive-fg-l));
+
+/* Autres */
+--background, --foreground, --muted, --muted-foreground
+--border, --ring, --input
+```
+
+---
+
+## Personnaliser avec Tailwind CSS
+
+### Approche 1 : Utiliser le preset par défaut (recommandé)
+
+Le preset inclut une configuration Tailwind pré-faite :
+
+```js
+// tailwind.config.ts
+import { uiKitPreset } from "@melv1c/ui-kit/tailwind.preset.js";
+
+export default {
+  presets: [uiKitPreset],
+  theme: {
+    extend: {
+      // Tes couleurs personnalisées
+      colors: {
+        "brand-blue": "#0066ff",
+      },
+    },
+  },
+};
+```
+
+### Approche 2 : Personnaliser les variables CSS
+
+Modifie les variables CSS dans ton fichier de styles principal :
+
+```css
+/* styles.css */
+@import "@melv1c/ui-kit/styles.css";
+
+@layer base {
+  :root {
+    /* Primary - Changer la couleur primaire */
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Destructive - Changer la couleur d'erreur */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Background */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    /* Muted */
+    --muted: 210 10% 30%;
+    --muted-foreground: 215 16% 47%;
+  }
+
+  /* Mode sombre */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --primary: 210 40% 96%;
+      --primary-foreground: 222 47% 11%;
+
+      --background: 222 47% 11%;
+      --foreground: 210 40% 98%;
+
+      --muted: 217 33% 17%;
+      --muted-foreground: 215 16% 47%;
+    }
+  }
+}
+```
+
+---
+
+## Thème sombre (Dark Mode)
+
+Le thème sombre est supporté avec `prefers-color-scheme`.
+
+### Activer le dark mode automatique
+
+```tsx
+export default function App() {
+  return <div className="dark">{/* Tout le contenu sera en dark mode */}</div>;
+}
+```
+
+### Avec tailwind.config.ts
+
+```ts
+export default {
+  darkMode: "class", // Utilise la classe "dark"
+  theme: {
+    extend: {},
+  },
+};
+```
+
+---
+
+## Exemple : Custom Branding
+
+Voici comment créer un thème custom pour ta marque :
+
+```css
+@layer base {
+  :root {
+    /* Brand colors - Orange et Bleu */
+    --primary: 38 92% 50%; /* Orange vif */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 91% 60%; /* Bleu ciel */
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 281 89% 66%; /* Violet */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%; /* Rouge */
+    --destructive-foreground: 0 0% 100%;
+
+    --background: 0 0% 100%; /* Blanc */
+    --foreground: 217 32% 17%; /* Bleu foncé */
+
+    --muted: 217 32% 17%;
+    --muted-foreground: 217 12% 50%;
+
+    --border: 217 32% 88%;
+    --ring: 38 92% 50%;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 217 32% 10%;
+      --foreground: 0 0% 100%;
+      --border: 217 32% 30%;
+    }
+  }
+}
+```
+
+---
+
+## Override au niveau du composant
+
+Tu peux aussi personnaliser des composants individuellement avec Tailwind :
+
+```tsx
+import { Button } from "@melv1c/ui-kit";
+
+export default function CustomButton() {
+  return (
+    <Button className="bg-red-500 text-white hover:bg-red-600">
+      Custom Button
+    </Button>
+  );
+}
+```
+
+---
+
+## Outils pour choisir les couleurs
+
+- 🎨 [Tailwind Color Generator](https://www.tailwindshades.com/)
+- 🎨 [HSL Color Picker](https://www.rapidtables.com/web/color/hsl-color.html)
+- 🎨 [Coolors.co](https://coolors.co/)
+
+---
+
+## Best Practices
+
+✅ **DO:**
+
+- Définis les variables CSS à la racine
+- Utilise le preset Tailwind fourni
+- Teste ton thème en mode clair ET sombre
+- Utilise des couleurs contrastées pour l'accessibilité
+
+❌ **DON'T:**
+
+- Modifie les couleurs au niveau du composant (sauf cas spécial)
+- Utilise des couleurs hardcodées
+- Ignore le contrast ratio pour l'accessibilité
+
+---
+
+## Prochaines étapes
+
+- 🌍 [Internationalisation](/?path=/docs/documentation-internationalisation--docs)
+- 📚 [Get Started](/?path=/docs/documentation-get-started--docs)

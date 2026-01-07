@@ -1,0 +1,337 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/FAQ & Troubleshooting" />
+
+# FAQ & Troubleshooting
+
+## ❓ Questions fréquentes
+
+### Puis-je utiliser la librairie sans Tailwind CSS ?
+
+**Non**, `@melv1c/ui-kit` est construit **sur Tailwind CSS**. Tu dois avoir Tailwind configuré dans ton projet.
+
+Si tu n'aimes pas Tailwind, tu peux :
+
+- Utiliser `shadcn/ui` directement
+- Forker et adapter les composants
+
+### Puis-je modifier les composants directement ?
+
+**Non recommandé**. Mieux vaut :
+
+1. **Extends avec `className`** :
+
+```tsx
+import { Button } from "@melv1c/ui-kit";
+
+<Button className="my-custom-class">Custom</Button>;
+```
+
+2. **Créer un wrapper** :
+
+```tsx
+export const MyButton = (props) => <Button className="my-style" {...props} />;
+```
+
+3. **Utiliser des composants personnalisés** pour tes cas spécifiques
+
+### Comment contribuer des composants ?
+
+Pour l'instant, la librairie est interne. Si tu as besoin d'un composant :
+
+1. Crée une issue
+2. Décris le cas d'usage
+3. Proposes un implémentation
+
+### Puis-je utiliser la librairie avec Next.js ?
+
+**Oui, totalement**. Les composants sont compatibles avec Next.js 13+ (App Router).
+
+```tsx
+"use client"; // Si nécessaire
+
+import { Button } from "@melv1c/ui-kit";
+
+export default function Page() {
+  return <Button>Next.js</Button>;
+}
+```
+
+### Puis-je utiliser la librairie avec Remix ?
+
+**Oui**, tant que tu utilises React 18+.
+
+---
+
+## 🔧 Troubleshooting
+
+### Les styles ne s'appliquent pas
+
+**Problème** : Les composants s'affichent sans styles
+
+**Solutions** :
+
+1. **Vérifie que Tailwind est installé** :
+
+```bash
+npm list tailwindcss
+```
+
+2. **Ajoute le contenu au `tailwind.config.js`** :
+
+```js
+content: [
+  "./node_modules/@melv1c/ui-kit/**/*.{js,ts,jsx,tsx}",
+  "./src/**/*.{js,ts,jsx,tsx}",
+];
+```
+
+3. **Importe les styles CSS** :
+
+```tsx
+import "@melv1c/ui-kit/styles.css";
+```
+
+4. **Redémarre ton serveur dev** :
+
+```bash
+npm run dev # ou yarn dev
+```
+
+---
+
+### Module not found: @melv1c/ui-kit
+
+**Problème** : `Cannot find module '@melv1c/ui-kit'`
+
+**Solutions** :
+
+1. **Installe la librairie** :
+
+```bash
+pnpm add @melv1c/ui-kit
+```
+
+2. **Vérifie le nom du package** dans `package.json`
+
+3. **Vérifiez les alias** (si tu utilises `@` comme alias) :
+
+```ts
+// tsconfig.json ou vite.config.ts
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+---
+
+### Les composants ne sont pas typés
+
+**Problème** : TypeScript ne reconnaît pas les types
+
+**Solutions** :
+
+1. **Vérifie `tsconfig.json`** :
+
+```json
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "esModuleInterop": true
+  }
+}
+```
+
+2. **Réinstalle avec types** :
+
+```bash
+pnpm add --save-dev @types/react @types/react-dom
+```
+
+3. **Importe les types** :
+
+```tsx
+import type { ButtonProps } from "@melv1c/ui-kit";
+
+const MyButton: React.FC<ButtonProps> = (props) => {
+  return <Button {...props} />;
+};
+```
+
+---
+
+### Dialog/Modal ne s'ouvre pas
+
+**Problème** : Le dialog reste fermé malgré `open={true}`
+
+**Solutions** :
+
+```tsx
+import { useState } from "react";
+import { Dialog, Button } from "@melv1c/ui-kit";
+
+export default function Example() {
+  const [open, setOpen] = useState(false); // ✅ Nécessaire
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Ouvrir</Button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        {/* Contenu */}
+      </Dialog>
+    </>
+  );
+}
+```
+
+---
+
+### Les traductions ne fonctionnent pas
+
+**Problème** : Les textes restent en English
+
+**Solutions** :
+
+1. **Vérifie que i18n est initialisé** :
+
+```tsx
+// main.tsx AVANT d'importer App
+import "./i18n";
+```
+
+2. **Enveloppe avec I18nextProvider** :
+
+```tsx
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n";
+
+<I18nextProvider i18n={i18n}>
+  <App />
+</I18nextProvider>;
+```
+
+3. **Utilise le bon namespace** :
+
+```tsx
+const { t } = useTranslation("ui"); // ✅ Correct
+```
+
+4. **Vérifies les ressources i18n** :
+
+```tsx
+console.log(i18n.getDataByLanguage("en")); // Debug
+```
+
+---
+
+### Performance : Trop lourd à l'import
+
+**Problème** : L'import de toute la lib augmente la bundle size
+
+**Solution** : Tree-shaking automatique avec les exports nommés
+
+```tsx
+// ✅ Seulement Button est inclus dans la bundle
+import { Button } from "@melv1c/ui-kit";
+
+// ❌ Importe tout (mauvais)
+import * as UI from "@melv1c/ui-kit";
+```
+
+Vérifie que ta config de build supporte le tree-shaking :
+
+```js
+// vite.config.ts
+export default {
+  build: {
+    rollupOptions: {
+      output: {
+        chunkFileNames: "[hash].js", // Code splitting
+      },
+    },
+  },
+};
+```
+
+---
+
+### Conflits Tailwind
+
+**Problème** : Tes styles Tailwind entrent en conflit avec la librairie
+
+**Solutions** :
+
+1. **Utilise le même preset** :
+
+```ts
+import { uiKitPreset } from "@melv1c/ui-kit/tailwind.preset.js";
+
+export default {
+  presets: [uiKitPreset],
+};
+```
+
+2. **Ou applique `!important` prudently** (dernier recours) :
+
+```tsx
+<Button className="!bg-red-500">Override</Button>
+```
+
+---
+
+### Dark mode ne fonctionne pas
+
+**Problème** : Le dark mode ne s'active pas
+
+**Solutions** :
+
+1. **Configure le mode dark** dans `tailwind.config.ts` :
+
+```ts
+export default {
+  darkMode: "class", // ou "media"
+};
+```
+
+2. **Ajoute la classe `dark`** :
+
+```tsx
+<div className="dark">
+  <Button>En dark mode</Button>
+</div>
+```
+
+3. **Ou utilise le système** :
+
+```tsx
+useEffect(() => {
+  if (prefersDark) {
+    document.documentElement.classList.add("dark");
+  }
+}, []);
+```
+
+---
+
+## 📞 Besoin d'aide ?
+
+Si tu trouves un bug :
+
+1. Vérifie les issues existantes
+2. Crée une nouvelle issue avec :
+   - La version (`@melv1c/ui-kit@x.x.x`)
+   - Un exemple minimaliste (Codesandbox/Stackblitz)
+   - Les logs d'erreur complets
+
+---
+
+## 🚀 Prochaines étapes
+
+- 📚 [Get Started](/?path=/docs/documentation-get-started--docs) pour commencer
+- 🎨 [Theming](/?path=/docs/documentation-theming--docs) pour personnaliser
+- 📖 [Component Guide](/?path=/docs/documentation-component-guide--docs) pour les patterns

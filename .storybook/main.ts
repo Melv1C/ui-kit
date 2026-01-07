@@ -6,7 +6,10 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  stories: [
+    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../src/stories/**/*.@(mdx|stories.@(js|jsx|mjs|ts|tsx))",
+  ],
   addons: ["@storybook/addon-a11y", "@storybook/addon-docs"],
   framework: "@storybook/react-vite",
   async viteFinal(existingConfig) {

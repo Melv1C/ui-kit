@@ -38,6 +38,25 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    options: {
+      storySort: {
+        method: "configure",
+        order: [
+          "Documentation",
+          [
+            "Introduction",
+            "Installation",
+            "Get Started",
+            "Theming",
+            "Internationalisation",
+            "Component Guide",
+            "API Reference",
+            "FAQ & Troubleshooting",
+          ],
+          "Components",
+        ],
+      },
+    },
   },
   decorators: [useI18next],
   globalTypes: {

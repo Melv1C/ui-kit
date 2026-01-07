@@ -1,0 +1,366 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/Internationalisation" />
+
+# Internationalisation (i18n)
+
+`@melv1c/ui-kit` est livré avec un **système i18n complet** basé sur **i18next** et **react-i18next**.
+
+Supports actuels :
+
+- 🇺🇸 English (EN)
+- 🇫🇷 Français (FR)
+
+---
+
+## Installation et configuration
+
+### 1. Installer les dépendances
+
+```bash
+pnpm add i18next react-i18next
+```
+
+### 2. Initialiser i18next
+
+Crée un fichier `src/i18n.ts` :
+
+```tsx
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import { en, fr } from "@melv1c/ui-kit/locales";
+
+i18n.use(initReactI18next).init({
+  resources: {
+    en: {
+      ui: en,
+    },
+    fr: {
+      ui: fr,
+    },
+  },
+  lng: "en", // Langue par défaut
+  fallbackLng: "en", // Langue de secours
+  interpolation: {
+    escapeValue: false, // React échappe déjà les valeurs
+  },
+});
+
+export default i18n;
+```
+
+### 3. Initialiser i18n au démarrage
+
+Dans `main.tsx` ou `app.tsx` :
+
+```tsx
+import "./i18n"; // Doit être importé avant les composants
+import App from "./App";
+
+// Ton app
+```
+
+### 4. Wrapper avec I18nextProvider
+
+```tsx
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n";
+import App from "./App";
+
+export default function Root() {
+  return (
+    <I18nextProvider i18n={i18n}>
+      <App />
+    </I18nextProvider>
+  );
+}
+```
+
+---
+
+## Utiliser les traductions
+
+### Avec le hook `useTranslation`
+
+```tsx
+import { useTranslation } from "react-i18next";
+
+export default function MyComponent() {
+  const { t } = useTranslation("ui");
+
+  return <div>{t("button.submit")}</div>;
+}
+```
+
+### Changer la langue
+
+```tsx
+import { useTranslation } from "react-i18next";
+
+export default function LanguageSwitcher() {
+  const { i18n } = useTranslation();
+
+  return (
+    <div className="flex gap-2">
+      <button
+        onClick={() => i18n.changeLanguage("en")}
+        className={i18n.language === "en" ? "font-bold" : ""}
+      >
+        English
+      </button>
+      <button
+        onClick={() => i18n.changeLanguage("fr")}
+        className={i18n.language === "fr" ? "font-bold" : ""}
+      >
+        Français
+      </button>
+    </div>
+  );
+}
+```
+
+---
+
+## Traductions disponibles
+
+Les traductions de `@melv1c/ui-kit` couvrent :
+
+- ✅ Labels des composants (Button, Dialog, etc.)
+- ✅ Messages de validation
+- ✅ Textes par défaut
+- ✅ Messages d'erreur
+
+Voici un aperçu :
+
+### English
+
+```json
+{
+  "button": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "save": "Save"
+  },
+  "dialog": {
+    "confirm": "Are you sure?",
+    "close": "Close"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next"
+  }
+}
+```
+
+### Français
+
+```json
+{
+  "button": {
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "save": "Enregistrer"
+  },
+  "dialog": {
+    "confirm": "Êtes-vous sûr ?",
+    "close": "Fermer"
+  },
+  "pagination": {
+    "previous": "Précédent",
+    "next": "Suivant"
+  }
+}
+```
+
+---
+
+## Ajouter ta propre langue
+
+### Étape 1 : Créer le fichier de traduction
+
+```json
+// src/locales/es.json
+{
+  "button": {
+    "submit": "Enviar",
+    "cancel": "Cancelar"
+  }
+}
+```
+
+### Étape 2 : Ajouter à i18next
+
+```tsx
+import es from "./locales/es.json";
+
+i18n.init({
+  resources: {
+    en: { ui: en },
+    fr: { ui: fr },
+    es: { ui: es }, // ✅ Ajouter ici
+  },
+});
+```
+
+### Étape 3 : Utiliser
+
+```tsx
+const { i18n } = useTranslation();
+i18n.changeLanguage("es"); // Espagnol
+```
+
+---
+
+## RTL (Direction texte droite à gauche)
+
+Pour les langues RTL (Arabe, Hébreu, etc.), configure la direction :
+
+```tsx
+i18n.on("languageChanged", (locale) => {
+  const direction = i18n.dir(locale); // "ltr" ou "rtl"
+  document.documentElement.dir = direction;
+  document.documentElement.lang = locale;
+});
+```
+
+---
+
+## Exemple complet
+
+Voici une application multilingue complète :
+
+```tsx
+import { useTranslation } from "react-i18next";
+import { Button, Card, Input, Label } from "@melv1c/ui-kit";
+import { useState } from "react";
+
+export default function App() {
+  const { t, i18n } = useTranslation("ui");
+  const [email, setEmail] = useState("");
+
+  return (
+    <div className="min-h-screen bg-gray-50 p-8">
+      {/* Sélecteur de langue */}
+      <div className="mb-8 flex gap-2">
+        <button
+          onClick={() => i18n.changeLanguage("en")}
+          className={`rounded px-4 py-2 ${
+            i18n.language === "en" ? "bg-blue-600 text-white" : "bg-gray-200"
+          }`}
+        >
+          English
+        </button>
+        <button
+          onClick={() => i18n.changeLanguage("fr")}
+          className={`rounded px-4 py-2 ${
+            i18n.language === "fr" ? "bg-blue-600 text-white" : "bg-gray-200"
+          }`}
+        >
+          Français
+        </button>
+      </div>
+
+      {/* Formulaire */}
+      <Card className="max-w-sm">
+        <Card.Header>
+          <Card.Title>{t("form.title") || "Contact"}</Card.Title>
+        </Card.Header>
+
+        <Card.Content className="space-y-4">
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="email@exemple.fr"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+        </Card.Content>
+
+        <Card.Footer>
+          <Button>{t("button.submit")}</Button>
+        </Card.Footer>
+      </Card>
+    </div>
+  );
+}
+```
+
+---
+
+## Intégration avec les composants
+
+Les composants comme **Dialog**, **Pagination**, et **Forms** utilisent les traductions automatiquement :
+
+```tsx
+import { Pagination } from "@melv1c/ui-kit";
+
+export default function MyPagination() {
+  // Les boutons "Previous" / "Next" sont automatiquement traduits
+  return <Pagination currentPage={1} totalPages={10} />;
+}
+```
+
+---
+
+## Namespaces
+
+Les traductions sont organisées par **namespaces**. Le namespace par défaut est `"ui"` :
+
+```tsx
+// Récupérer le namespace "ui"
+const { t } = useTranslation("ui");
+
+// Accéder aux traductions
+t("button.submit"); // ✅ Fonctionne
+t("custom.myKey"); // ❌ "custom" n'existe pas dans "ui"
+```
+
+Pour ajouter tes propres namespaces :
+
+```tsx
+i18n.init({
+  resources: {
+    en: {
+      ui: en,
+      custom: myCustomTranslations,
+    },
+  },
+});
+```
+
+---
+
+## Best Practices
+
+✅ **DO:**
+
+- Utilise toujours le hook `useTranslation`
+- Organise les traductions par domaine (button, form, dialog, etc.)
+- Fais tester par des natifs pour chaque langue
+- Gère les pluriels avec i18next (cf. [documentation i18next](https://www.i18next.com/))
+
+❌ **DON'T:**
+
+- Hardcode des textes en plusieurs langues
+- Oublie les espaces et ponctuation
+- Ignores les différences culturelles (dates, devises, etc.)
+
+---
+
+## Ressources
+
+- 📖 [Documentation i18next](https://www.i18next.com/)
+- 📖 [Documentation react-i18next](https://react.i18next.com/)
+- 🌍 [Support des langues](https://www.i18next.com/misc/supported-languages)
+
+---
+
+## Prochaines étapes
+
+- 📚 [Get Started](/?path=/docs/documentation-get-started--docs)
+- 🎨 [Theming](/?path=/docs/documentation-theming--docs)

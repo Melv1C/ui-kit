@@ -1,0 +1,131 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/Installation" />
+
+# Installation
+
+## Prérequis
+
+Avant de commencer, assure-toi d'avoir :
+
+- **React 18+**
+- **Node.js 16+**
+- **Tailwind CSS 3+** configuré dans ton projet
+- **TypeScript** (optionnel, mais recommandé)
+
+## Avec pnpm
+
+```bash
+pnpm add @melv1c/ui-kit
+```
+
+## Avec npm
+
+```bash
+npm install @melv1c/ui-kit
+```
+
+## Avec yarn
+
+```bash
+yarn add @melv1c/ui-kit
+```
+
+---
+
+## Configuration Tailwind
+
+La librairie utilise **Tailwind CSS** pour les styles. Tu dois ajouter le contenu de `@melv1c/ui-kit` à ta configuration Tailwind.
+
+### 1. Ajouter le contenu au template
+
+Dans `tailwind.config.js` ou `tailwind.config.ts` :
+
+```js
+import { uiKitPreset } from "@melv1c/ui-kit/tailwind.preset.js";
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  presets: [uiKitPreset],
+  content: [
+    "./node_modules/@melv1c/ui-kit/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+};
+```
+
+> **ℹ️** Le preset `uiKitPreset` inclut les variables CSS utilisées par les composants.
+
+### 2. Importer les styles
+
+Dans ton fichier principal (ex: `main.tsx` ou `app.tsx`) :
+
+```tsx
+import "@melv1c/ui-kit/styles.css";
+```
+
+---
+
+## Importer des composants
+
+Les composants sont disponibles depuis la racine :
+
+```tsx
+import { Button, Card, Dialog } from "@melv1c/ui-kit";
+
+export default function App() {
+  return (
+    <Card>
+      <Button>Cliquez-moi</Button>
+    </Card>
+  );
+}
+```
+
+### Importer les locales (traductions)
+
+Si tu utilises i18next (voir section Internationalisation) :
+
+```tsx
+import { en, fr } from "@melv1c/ui-kit/locales";
+```
+
+### Importer les Monaco Editors (optionnel)
+
+La librairie inclut des composants d'édition de code :
+
+```tsx
+import { CodeDiffEditor, CodeEditor } from "@melv1c/ui-kit/monaco-editors";
+```
+
+### Importer le Rich Text Editor (optionnel)
+
+Pour l'édition de texte riche :
+
+```tsx
+import { RichTextEditor } from "@melv1c/ui-kit/rich-text-editor";
+```
+
+---
+
+## Vérifier l'installation
+
+Pour vérifier que tout est correctement installé, essaie d'importer et d'utiliser un composant :
+
+```tsx
+import { Button } from "@melv1c/ui-kit";
+
+export default function Test() {
+  return <Button>✅ Ça marche!</Button>;
+}
+```
+
+Si le bouton s'affiche correctement avec les styles Tailwind, tu es prêt ! 🎉
+
+---
+
+## Prochaines étapes
+
+- 🚀 [Get Started](/?path=/docs/documentation-get-started--docs) — Créer ta première page
+- 🎨 [Theming](/?path=/docs/documentation-theming--docs) — Personnaliser les couleurs
+- 🌍 [Internationalisation](/?path=/docs/documentation-internationalisation--docs) — Ajouter plusieurs langues
