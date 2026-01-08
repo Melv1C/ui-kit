@@ -31,13 +31,13 @@
     "dev": "storybook dev -p 6006",
     "build": "tsup",
     "build:watch": "tsup --watch",
+    "build:storybook": "storybook build",
     "clean": "rm -rf dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "storybook": "storybook dev -p 6006"
   },
   "peerDependencies": {
     "@monaco-editor/react": "^4.7.0",
