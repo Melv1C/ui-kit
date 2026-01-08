@@ -3,7 +3,7 @@ import type { Preview } from "@storybook/react-vite";
 import { Suspense, useEffect } from "react";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../src/i18n";
-import "../styles.css";
+import "./index.css";
 
 // Wrap your stories in the I18nextProvider component
 const useI18next: Decorator = (Story, context) => {
