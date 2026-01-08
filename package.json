@@ -17,16 +17,6 @@
       "types": "./dist/locales/index.d.ts",
       "import": "./dist/locales/index.js",
       "require": "./dist/locales/index.cjs"
-    },
-    "./monaco-editors": {
-      "types": "./dist/monaco-editors.d.ts",
-      "import": "./dist/monaco-editors.js",
-      "require": "./dist/monaco-editors.cjs"
-    },
-    "./rich-text-editor": {
-      "types": "./dist/rich-text-editor.d.ts",
-      "import": "./dist/rich-text-editor.js",
-      "require": "./dist/rich-text-editor.cjs"
     }
   },
   "files": [

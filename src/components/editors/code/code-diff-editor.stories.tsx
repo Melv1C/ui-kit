@@ -1,32 +1,33 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+import { Label } from "@/components/base/label";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
-import { CodeEditor } from "./code-editor";
+import { CodeDiffEditor } from "./code-diff-editor";
 
-const typeScriptCode = `interface User {
+const originalCode = `interface User {
+  id: string
+  name: string
+}`;
+
+const modifiedCode = `interface User {
   id: string
   name: string
   email: string
-}
-
-function greetUser(user: User): string {
-  return \`Hello, \${user.name}!\`
+  createdAt: Date
 }`;
 
-const meta: Meta<typeof CodeEditor> = {
-  component: CodeEditor,
+const meta: Meta<typeof CodeDiffEditor> = {
+  component: CodeDiffEditor,
   parameters: {
     layout: "padded",
     docs: {
       description: {
-        component: `A code editor component built with Monaco Editor (VS Code's editor).
+        component: `A diff editor component built with Monaco Editor for comparing two code versions side by side.
 
 **Features:**
+- Side-by-side code comparison
 - Syntax highlighting for 10+ languages
-- Auto-completion and IntelliSense
-- Light and dark theme support  
-- Diff editor for code comparison
+- Light and dark theme support
 - Customizable options
+- Resizable split view
 
 **Installation:**
 This component requires \`@monaco-editor/react\` and \`monaco-editor\` as peer dependencies. Install them in your project:
@@ -38,10 +39,10 @@ bun add @monaco-editor/react monaco-editor
 \`\`\`
 
 **Import:**
-Since Monaco Editor components are optional, they are exported from a separate path:
+Monaco Editor is lazy-loaded automatically when used:
 
 \`\`\`tsx
-import { CodeEditor } from "@melv1c/ui/monaco-editors";
+import { CodeDiffEditor } from "@melv1c/ui-kit";
 \`\`\`
 
 See [Monaco React docs](https://github.com/suren-atoyan/monaco-react)`,
@@ -84,41 +85,29 @@ See [Monaco React docs](https://github.com/suren-atoyan/monaco-react)`,
     disabled: {
       control: "boolean",
     },
-    lineNumbers: {
-      control: "boolean",
-    },
-    wordWrap: {
-      control: "boolean",
-    },
-    minimap: {
-      control: "boolean",
-    },
   },
   args: {
     language: "typescript",
     theme: "qualifio",
     readOnly: false,
     disabled: false,
-    lineNumbers: true,
-    wordWrap: false,
-    minimap: false,
     variant: "default",
     size: "default",
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof CodeEditor>;
+type Story = StoryObj<typeof CodeDiffEditor>;
 
 export const Default: Story = {
-  render: (props) => {
-    const [value, setValue] = useState(typeScriptCode);
-    return (
-      <CodeEditor
-        value={value}
-        onChange={(v) => setValue(v ?? "")}
+  render: (props) => (
+    <div className="grid gap-3">
+      <Label>Code Comparison</Label>
+      <CodeDiffEditor
+        original={originalCode}
+        modified={modifiedCode}
         {...props}
       />
-    );
-  },
+    </div>
+  ),
 };

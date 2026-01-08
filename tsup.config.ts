@@ -4,15 +4,13 @@ export default defineConfig({
   entry: {
     index: "src/index.ts",
     "locales/index": "src/locales/index.ts",
-    "monaco-editors": "src/components/monaco-editors/index.ts",
-    "rich-text-editor": "src/components/rich-text-editor/index.ts",
   },
   format: ["esm", "cjs"],
   dts: true,
   sourcemap: true,
   clean: true,
   treeshake: true,
-  splitting: false,
+  splitting: true, // Enable code-splitting for lazy imports
 
   external: [
     "react",

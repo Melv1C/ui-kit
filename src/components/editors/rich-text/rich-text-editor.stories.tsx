@@ -29,10 +29,10 @@ bun add @tiptap/react @tiptap/starter-kit @tiptap/extension-underline @tiptap/ex
 \`\`\`
 
 **Import:**
-Since TipTap editor components are optional, they are exported from a separate path:
+TipTap is lazy-loaded automatically when used:
 
 \`\`\`tsx
-import { RichTextEditor } from "@melv1c/ui/rich-text-editor";
+import { RichTextEditor } from "@melv1c/ui-kit";
 \`\`\`
 
 See [TipTap docs](https://tiptap.dev/docs)`,
