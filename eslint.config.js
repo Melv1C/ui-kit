@@ -14,7 +14,7 @@ export default tseslint.config(
       // Ignore Files from Shadcn UI
       "**/use-mobile.ts",
       "**/base/**/*.tsx",
-      "!**/base/**/*.stories.tsx",  
+      "!**/base/**/*.stories.tsx",
     ],
   },
   {

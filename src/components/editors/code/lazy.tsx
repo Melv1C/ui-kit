@@ -13,7 +13,7 @@ const CodeDiffEditorInternal = lazy(() =>
 );
 
 function EditorSkeleton() {
-  return <Skeleton className="h-full w-full min-h-50" />;
+  return <Skeleton className="h-full min-h-50 w-full" />;
 }
 
 type CodeEditorProps = ComponentProps<typeof CodeEditorInternal>;

@@ -9,7 +9,7 @@ const RichTextEditorInternal = lazy(() =>
 );
 
 function EditorSkeleton() {
-  return <Skeleton className="h-full w-full min-h-[100px]" />;
+  return <Skeleton className="h-full min-h-[100px] w-full" />;
 }
 
 type RichTextEditorProps = ComponentProps<typeof RichTextEditorInternal>;
