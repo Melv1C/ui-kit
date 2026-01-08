@@ -1,3 +1,8 @@
+/**
+ * Internal i18n instance for Storybook development.
+ * Not exported from the library - consumers should use
+ * LocaleProvider or TranslationProvider instead.
+ */
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import * as locales from "./locales";
