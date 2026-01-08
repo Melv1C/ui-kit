@@ -4,7 +4,7 @@ A React component library built with Tailwind CSS and TypeScript.
 
 ## Documentation
 
-For detailed usage instructions, installation guides, and component documentation, visit the [online documentation](https://your-storybook-url.com).
+For detailed usage instructions, installation guides, and component documentation, visit the [online documentation](https://ui-kit.melvyn.be).
 
 ## Concept
 
