@@ -1,5 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@import "@melv1c/ui-kit/base.css";
-@import "@melv1c/ui-kit/themes/default.css";
+@import "../src/styles/base.css";
+@import "../src/styles/themes/default.css";
