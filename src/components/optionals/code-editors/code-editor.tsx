@@ -1,10 +1,9 @@
+import { Skeleton } from "@/components/base/skeleton";
+import { cn } from "@/lib/utils";
 import { Editor, type Monaco } from "@monaco-editor/react";
 import type { VariantProps } from "class-variance-authority";
 import type { editor } from "monaco-editor";
 import { type HTMLAttributes, useMemo } from "react";
-import { Skeleton } from "@/components/base/skeleton";
-import { cn } from "@/lib/utils";
-import { defineQualifioThemes } from "./qualifio-themes";
 import type { EditorTheme, SupportedLanguage } from "./types";
 import { codeEditorVariants } from "./variants";
 
@@ -83,11 +82,6 @@ function CodeEditor({
         value={value}
         defaultValue={defaultValue}
         onChange={onChange}
-        beforeMount={(monaco) => {
-          defineQualifioThemes(monaco).catch((error) => {
-            console.error("Failed to define Qualifio themes:", error);
-          });
-        }}
         onMount={onMount}
         onValidate={onValidate}
         options={editorOptions}
@@ -97,5 +91,5 @@ function CodeEditor({
   );
 }
 
-export { CodeEditor, type CodeEditorProps };
 export type { EditorTheme, SupportedLanguage } from "./types";
+export { CodeEditor, type CodeEditorProps };

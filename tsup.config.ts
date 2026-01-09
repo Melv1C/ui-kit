@@ -5,6 +5,9 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   entry: {
     index: "src/index.ts",
+    "code-editors/index": "src/components/optionals/code-editors/index.ts",
+    "rich-text-editor/index":
+      "src/components/optionals/rich-text-editor/index.ts",
     "locales/index": "src/locales/index.ts",
   },
   format: ["esm", "cjs"],

@@ -1,14 +1,17 @@
-import { DiffEditor, type Monaco } from "@monaco-editor/react";
+import { Skeleton } from "@/components/base/skeleton";
+import { cn } from "@/lib/utils";
+import {
+  DiffEditor,
+  type DiffEditorProps,
+  type Monaco,
+} from "@monaco-editor/react";
 import type { VariantProps } from "class-variance-authority";
 import type { editor } from "monaco-editor";
 import { type HTMLAttributes, useMemo } from "react";
-import { Skeleton } from "@/components/base/skeleton";
-import { cn } from "@/lib/utils";
-import { defineQualifioThemes } from "./qualifio-themes";
 import type { EditorTheme, SupportedLanguage } from "./types";
 import { codeEditorVariants } from "./variants";
 
-interface DiffEditorProps
+interface CodeDiffEditorProps
   extends
     VariantProps<typeof codeEditorVariants>,
     Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
@@ -39,7 +42,7 @@ function CodeDiffEditor({
   onMount,
   options,
   ...props
-}: DiffEditorProps) {
+}: CodeDiffEditorProps) {
   const editorOptions = useMemo(
     () => ({
       readOnly: readOnly || disabled,
@@ -70,11 +73,6 @@ function CodeDiffEditor({
         theme={theme}
         original={original}
         modified={modified}
-        beforeMount={(monaco) => {
-          defineQualifioThemes(monaco).catch((error) => {
-            console.error("Failed to define Qualifio themes:", error);
-          });
-        }}
         onMount={onMount}
         options={editorOptions}
         loading={<LoadingFallback />}
