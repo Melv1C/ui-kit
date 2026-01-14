@@ -93,35 +93,6 @@ function LoginForm({
       <CardContent>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-6">
-            {providers.length > 0 && (
-              <>
-                <div className="flex flex-col gap-3">
-                  {providers.map((provider) => (
-                    <Button
-                      key={provider}
-                      type="button"
-                      variant="outline"
-                      className="w-full"
-                      onClick={() => onProviderLogin?.(provider)}
-                      disabled={isLoading}
-                    >
-                      {providerIcons[provider]}
-                      {t(`loginForm.providers.${provider}`)}
-                    </Button>
-                  ))}
-                </div>
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <Separator className="w-full" />
-                  </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-card text-muted-foreground px-2">
-                      {t("loginForm.orContinueWith")}
-                    </span>
-                  </div>
-                </div>
-              </>
-            )}
             <div className="grid gap-2">
               <Label htmlFor="login-email">{t("loginForm.email")}</Label>
               <Input
@@ -164,6 +135,35 @@ function LoginForm({
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? t("loginForm.loggingIn") : t("loginForm.login")}
             </Button>
+            {providers.length > 0 && (
+              <>
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <Separator className="w-full" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-card text-muted-foreground px-2">
+                      {t("loginForm.orContinueWith")}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-3">
+                  {providers.map((provider) => (
+                    <Button
+                      key={provider}
+                      type="button"
+                      variant="outline"
+                      className="w-full"
+                      onClick={() => onProviderLogin?.(provider)}
+                      disabled={isLoading}
+                    >
+                      {providerIcons[provider]}
+                      {t(`loginForm.providers.${provider}`)}
+                    </Button>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </form>
       </CardContent>
