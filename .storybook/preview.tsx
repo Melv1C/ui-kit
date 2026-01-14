@@ -68,6 +68,10 @@ const preview: Preview = {
         items: [
           { value: "en", title: "English" },
           { value: "fr", title: "Français" },
+          { value: "de", title: "Deutsch" },
+          { value: "es", title: "Español" },
+          { value: "it", title: "Italiano" },
+          { value: "nl", title: "Nederlands" },
         ],
         showName: true,
       },

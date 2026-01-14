@@ -17,6 +17,18 @@ i18n
       fr: {
         ui: locales.fr,
       },
+      de: {
+        ui: locales.de,
+      },
+      es: {
+        ui: locales.es,
+      },
+      it: {
+        ui: locales.it,
+      },
+      nl: {
+        ui: locales.nl,
+      },
     },
     lng: "en", // default language
     fallbackLng: "en",
