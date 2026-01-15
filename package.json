@@ -2,6 +2,10 @@
   "name": "@melv1c/ui-kit",
   "version": "1.2.2",
   "description": "A collection of reusable UI components built around Tailwind CSS, shadcn components, and other popular libraries.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/melv1c/ui-kit.git"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
