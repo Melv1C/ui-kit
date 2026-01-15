@@ -19,6 +19,10 @@
       "apple": "Doorgaan met Apple",
       "microsoft": "Doorgaan met Microsoft",
       "facebook": "Doorgaan met Facebook"
+    },
+    "errors": {
+      "invalidEmail": "Voer een geldig e-mailadres in.",
+      "passwordRequired": "Wachtwoord is verplicht."
     }
   }
 }

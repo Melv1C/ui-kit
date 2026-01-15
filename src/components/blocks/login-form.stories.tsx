@@ -22,8 +22,15 @@ All text is automatically translated based on the current locale.
   },
   tags: ["autodocs"],
   args: {
-    onSubmit: () => {
+    providers: [],
+    showForgotPassword: true,
+    showSignUp: true,
+    title: undefined,
+    description: undefined,
+    onSubmit: async () => {
       console.log("Form submitted");
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      throw new Error("Invalid email or password");
     },
     onProviderLogin: () => console.log("Provider login clicked"),
     onForgotPassword: () => {
@@ -47,10 +54,6 @@ All text is automatically translated based on the current locale.
       control: "boolean",
       description: "Show the sign up link",
     },
-    isLoading: {
-      control: "boolean",
-      description: "Loading state for the submit button",
-    },
     title: {
       control: "text",
       description: "Custom title (overrides translation)",
@@ -66,58 +69,5 @@ export default meta;
 type Story = StoryObj<typeof LoginForm>;
 
 export const Default: Story = {
-  render: (args) => <LoginForm {...args} />,
-};
-
-export const WithSocialProviders: Story = {
-  args: {
-    providers: ["google", "github"],
-  },
-  render: (args) => <LoginForm {...args} />,
-};
-
-export const AllProviders: Story = {
-  args: {
-    providers: ["google", "github", "apple", "microsoft", "facebook"],
-  },
-  render: (args) => <LoginForm {...args} />,
-};
-
-export const WithoutForgotPassword: Story = {
-  args: {
-    showForgotPassword: false,
-  },
-  render: (args) => <LoginForm {...args} />,
-};
-
-export const WithoutSignUp: Story = {
-  args: {
-    showSignUp: false,
-  },
-  render: (args) => <LoginForm {...args} />,
-};
-
-export const MinimalForm: Story = {
-  args: {
-    showForgotPassword: false,
-    showSignUp: false,
-  },
-  render: (args) => <LoginForm {...args} />,
-};
-
-export const Loading: Story = {
-  args: {
-    isLoading: true,
-    providers: ["google"],
-  },
-  render: (args) => <LoginForm {...args} />,
-};
-
-export const CustomTitleAndDescription: Story = {
-  args: {
-    title: "Welcome Back!",
-    description: "Sign in to continue to your dashboard",
-    providers: ["google", "github"],
-  },
   render: (args) => <LoginForm {...args} />,
 };

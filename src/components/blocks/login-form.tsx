@@ -1,7 +1,13 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CircleAlert, Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import * as z from "zod";
 
+import { Alert, AlertDescription } from "@/components/base/alert";
 import { Button } from "@/components/base/button";
 import {
   Card,
@@ -11,8 +17,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/base/card";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/base/field";
 import { Input } from "@/components/base/input";
-import { Label } from "@/components/base/label";
 import { Separator } from "@/components/base/separator";
 import {
   AppleIcon,
@@ -22,13 +33,23 @@ import {
   MicrosoftIcon,
 } from "@/components/icons";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+
+type LoginFormValues = {
+  email: string;
+  password: string;
+};
+
+const createLoginFormSchema = (t: (key: string) => string) =>
+  z.object({
+    email: z.email(t("loginForm.errors.invalidEmail")),
+    password: z.string().min(1, t("loginForm.errors.passwordRequired")),
+  });
 
 type LoginProvider = "google" | "github" | "apple" | "microsoft" | "facebook";
 
 interface LoginFormProps {
-  /** Callback when form is submitted with email and password */
-  onSubmit?: (email: string, password: string) => void;
+  /** Callback when form is submitted with email and password. Can throw an error that will be caught and displayed. */
+  onSubmit?: (email: string, password: string) => void | Promise<void>;
   /** Callback when a social provider login button is clicked */
   onProviderLogin?: (provider: LoginProvider) => void;
   /** Callback when forgot password link is clicked */
@@ -45,8 +66,8 @@ interface LoginFormProps {
   title?: string;
   /** Custom description for the login form */
   description?: string;
-  /** Loading state for the submit button */
-  isLoading?: boolean;
+  /** Custom validation schema (overrides default and translated schema) */
+  schema?: z.ZodType<LoginFormValues>;
   /** Additional class name for the card container */
   className?: string;
 }
@@ -69,69 +90,131 @@ function LoginForm({
   showSignUp = true,
   title,
   description,
-  isLoading = false,
+  schema,
   className,
 }: LoginFormProps) {
   const { t } = useTranslation("ui");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit?.(email, password);
+  const translatedSchema = createLoginFormSchema(t);
+  const resolvedSchema = schema ?? translatedSchema;
+
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(resolvedSchema as typeof translatedSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const handleFormSubmit = async (data: LoginFormValues) => {
+    try {
+      setError(null);
+      setIsLoading(true);
+      await onSubmit?.(data.email, data.password);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      setError(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const displayTitle = title ?? t("loginForm.title");
   const displayDescription = description ?? t("loginForm.description");
 
   return (
-    <Card className={cn("w-full max-w-md", className)}>
+    <Card className={cn("w-full min-w-md", className)}>
       <CardHeader className="text-center">
         <CardTitle className="text-xl">{displayTitle}</CardTitle>
         <CardDescription>{displayDescription}</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit}>
-          <div className="flex flex-col gap-6">
-            <div className="grid gap-2">
-              <Label htmlFor="login-email">{t("loginForm.email")}</Label>
-              <Input
-                id="login-email"
-                type="email"
-                placeholder={t("loginForm.emailPlaceholder")}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                disabled={isLoading}
-                autoComplete="email"
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="login-password">
-                  {t("loginForm.password")}
-                </Label>
-                {showForgotPassword && (
-                  <button
-                    type="button"
-                    onClick={onForgotPassword}
-                    className="text-muted-foreground hover:text-primary ml-auto text-sm underline-offset-4 hover:underline"
+        <form id="login-form" onSubmit={form.handleSubmit(handleFormSubmit)}>
+          <FieldGroup className="gap-6">
+            {error && (
+              <Alert variant="destructive">
+                <CircleAlert />
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            <Controller
+              name="email"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="login-email">
+                    {t("loginForm.email")}
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id="login-email"
+                    type="email"
+                    placeholder={t("loginForm.emailPlaceholder")}
                     disabled={isLoading}
-                  >
-                    {t("loginForm.forgotPassword")}
-                  </button>
-                )}
-              </div>
-              <Input
-                id="login-password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                disabled={isLoading}
-                autoComplete="current-password"
-              />
-            </div>
+                    autoComplete="email"
+                    aria-invalid={fieldState.invalid}
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+            <Controller
+              name="password"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <div className="flex items-center">
+                    <FieldLabel htmlFor="login-password">
+                      {t("loginForm.password")}
+                    </FieldLabel>
+                    {showForgotPassword && (
+                      <button
+                        type="button"
+                        onClick={onForgotPassword}
+                        className="text-muted-foreground hover:text-primary ml-auto text-sm underline-offset-4 hover:underline"
+                        disabled={isLoading}
+                      >
+                        {t("loginForm.forgotPassword")}
+                      </button>
+                    )}
+                  </div>
+                  <div className="relative">
+                    <Input
+                      {...field}
+                      id="login-password"
+                      type={showPassword ? "text" : "password"}
+                      disabled={isLoading}
+                      autoComplete="current-password"
+                      aria-invalid={fieldState.invalid}
+                      className="pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2"
+                      disabled={isLoading}
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }
+                    >
+                      {showPassword ? (
+                        <EyeOff className="size-4" />
+                      ) : (
+                        <Eye className="size-4" />
+                      )}
+                    </button>
+                  </div>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? t("loginForm.loggingIn") : t("loginForm.login")}
             </Button>
@@ -164,7 +247,7 @@ function LoginForm({
                 </div>
               </>
             )}
-          </div>
+          </FieldGroup>
         </form>
       </CardContent>
       {showSignUp && (
@@ -186,4 +269,9 @@ function LoginForm({
   );
 }
 
-export { LoginForm, type LoginFormProps, type LoginProvider };
+export {
+  LoginForm,
+  type LoginFormProps,
+  type LoginFormValues,
+  type LoginProvider,
+};

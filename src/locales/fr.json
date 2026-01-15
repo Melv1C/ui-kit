@@ -19,6 +19,10 @@
       "apple": "Continuer avec Apple",
       "microsoft": "Continuer avec Microsoft",
       "facebook": "Continuer avec Facebook"
+    },
+    "errors": {
+      "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
+      "passwordRequired": "Le mot de passe est requis."
     }
   }
 }

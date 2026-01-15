@@ -19,6 +19,10 @@
       "apple": "Mit Apple fortfahren",
       "microsoft": "Mit Microsoft fortfahren",
       "facebook": "Mit Facebook fortfahren"
+    },
+    "errors": {
+      "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "passwordRequired": "Passwort ist erforderlich."
     }
   }
 }

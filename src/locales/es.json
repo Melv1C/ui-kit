@@ -19,6 +19,10 @@
       "apple": "Continuar con Apple",
       "microsoft": "Continuar con Microsoft",
       "facebook": "Continuar con Facebook"
+    },
+    "errors": {
+      "invalidEmail": "Por favor, introduzca una dirección de correo electrónico válida.",
+      "passwordRequired": "La contraseña es obligatoria."
     }
   }
 }
