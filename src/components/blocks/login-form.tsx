@@ -126,7 +126,7 @@ function LoginForm({
   const displayDescription = description ?? t("loginForm.description");
 
   return (
-    <Card className={cn("w-full min-w-md", className)}>
+    <Card className={cn("w-full max-w-md", className)}>
       <CardHeader className="text-center">
         <CardTitle className="text-xl">{displayTitle}</CardTitle>
         <CardDescription>{displayDescription}</CardDescription>
