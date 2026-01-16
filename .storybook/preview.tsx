@@ -16,7 +16,7 @@ const StoryWrapper: Decorator = (Story, context) => {
   return (
     <Suspense fallback={null}>
       <I18nextProvider i18n={i18n}>
-        <div className="flex flex-col gap-4 h-full w-full items-center justify-center p-4">
+        <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-4">
           <Story />
         </div>
       </I18nextProvider>
