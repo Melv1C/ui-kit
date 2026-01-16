@@ -13,7 +13,6 @@ import {
 const meta: Meta<typeof NavigationMenu> = {
   component: NavigationMenu,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

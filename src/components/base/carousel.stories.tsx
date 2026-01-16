@@ -11,7 +11,6 @@ import {
 const meta: Meta<typeof Carousel> = {
   component: Carousel,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

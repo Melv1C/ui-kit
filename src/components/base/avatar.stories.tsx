@@ -9,7 +9,6 @@ type ExtendedAvatarProps = React.ComponentProps<typeof Avatar> & {
 const meta: Meta<ExtendedAvatarProps> = {
   component: Avatar,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

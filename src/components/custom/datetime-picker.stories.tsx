@@ -5,9 +5,7 @@ import { DateTimePicker } from "./datetime-picker";
 
 const meta = {
   component: DateTimePicker,
-  parameters: {
-    layout: "centered",
-  },
+  parameters: {},
   tags: ["autodocs"],
   argTypes: {
     label: {

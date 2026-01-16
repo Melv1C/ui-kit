@@ -15,7 +15,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 const meta: Meta<typeof Tabs> = {
   component: Tabs,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

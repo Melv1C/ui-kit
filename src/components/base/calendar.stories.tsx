@@ -4,7 +4,6 @@ import { Calendar } from "./calendar";
 const meta: Meta<typeof Calendar> = {
   component: Calendar,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

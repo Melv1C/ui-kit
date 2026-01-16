@@ -12,7 +12,6 @@ import {
 const meta: Meta<typeof Breadcrumb> = {
   component: Breadcrumb,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

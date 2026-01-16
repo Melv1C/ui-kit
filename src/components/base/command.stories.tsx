@@ -26,7 +26,6 @@ import { Kbd } from "./kbd";
 const meta: Meta<typeof Command> = {
   component: Command,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

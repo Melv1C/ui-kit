@@ -4,7 +4,6 @@ import { FacebookIcon } from "./facebook-icon";
 const meta: Meta<typeof FacebookIcon> = {
   component: FacebookIcon,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

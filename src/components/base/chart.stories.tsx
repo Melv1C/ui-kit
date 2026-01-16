@@ -12,7 +12,6 @@ import {
 const meta: Meta<typeof ChartContainer> = {
   component: ChartContainer,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

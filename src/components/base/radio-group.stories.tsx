@@ -5,7 +5,6 @@ import { RadioGroup, RadioGroupItem } from "./radio-group";
 const meta: Meta<typeof RadioGroup> = {
   component: RadioGroup,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

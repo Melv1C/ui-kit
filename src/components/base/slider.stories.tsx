@@ -4,7 +4,6 @@ import { Slider } from "./slider";
 const meta: Meta<typeof Slider> = {
   component: Slider,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

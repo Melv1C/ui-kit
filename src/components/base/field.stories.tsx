@@ -31,7 +31,6 @@ import { Textarea } from "./textarea";
 const meta: Meta<typeof Field> = {
   component: Field,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

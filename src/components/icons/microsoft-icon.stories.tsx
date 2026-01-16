@@ -4,7 +4,6 @@ import { MicrosoftIcon } from "./microsoft-icon";
 const meta: Meta<typeof MicrosoftIcon> = {
   component: MicrosoftIcon,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

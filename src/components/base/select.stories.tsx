@@ -12,7 +12,6 @@ import {
 const meta: Meta<typeof Select> = {
   component: Select,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

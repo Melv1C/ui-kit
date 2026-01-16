@@ -6,7 +6,6 @@ import { Textarea } from "./textarea";
 const meta: Meta<typeof Textarea> = {
   component: Textarea,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

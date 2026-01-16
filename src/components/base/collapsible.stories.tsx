@@ -10,7 +10,6 @@ import {
 const meta: Meta<typeof Collapsible> = {
   component: Collapsible,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

@@ -6,7 +6,6 @@ import MultipleSelector, { type Option } from "./multiselect";
 const meta: Meta<typeof MultipleSelector> = {
   component: MultipleSelector,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

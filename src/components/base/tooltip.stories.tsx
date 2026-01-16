@@ -5,7 +5,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

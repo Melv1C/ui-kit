@@ -5,7 +5,6 @@ import { Badge } from "./badge";
 const meta: Meta<typeof Badge> = {
   component: Badge,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

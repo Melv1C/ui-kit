@@ -5,7 +5,6 @@ import { Toggle } from "./toggle";
 const meta: Meta<typeof Toggle> = {
   component: Toggle,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

@@ -4,7 +4,6 @@ import { Skeleton } from "./skeleton";
 const meta: Meta<typeof Skeleton> = {
   component: Skeleton,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

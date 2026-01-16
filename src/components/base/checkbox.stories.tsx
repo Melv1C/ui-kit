@@ -5,7 +5,6 @@ import { Label } from "./label";
 const meta: Meta<typeof Checkbox> = {
   component: Checkbox,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

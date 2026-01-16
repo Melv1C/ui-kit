@@ -15,7 +15,6 @@ import { Button } from "./button";
 const meta: Meta<typeof AlertDialog> = {
   component: AlertDialog,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `
@@ -63,7 +62,7 @@ export const WithLongContent: Story = {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Terms and Conditions</AlertDialogTitle>
-          <AlertDialogDescription className="max-h-[300px] overflow-y-auto">
+          <AlertDialogDescription className="max-h-75 overflow-y-auto">
             <p className="mb-2">
               This alert dialog contains longer content to demonstrate how it
               handles extended text. The content area can scroll if needed.

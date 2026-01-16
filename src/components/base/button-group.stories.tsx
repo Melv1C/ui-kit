@@ -10,7 +10,6 @@ import { Input } from "./input";
 const meta: Meta<typeof ButtonGroup> = {
   component: ButtonGroup,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `
@@ -70,7 +69,7 @@ export const WithSeparator: Story = {
 export const WithInput: Story = {
   render: (_) => (
     <ButtonGroup className="items-stretch">
-      <Input placeholder="Search" className="w-[200px]" />
+      <Input placeholder="Search" className="w-50" />
       <Button>Apply</Button>
     </ButtonGroup>
   ),

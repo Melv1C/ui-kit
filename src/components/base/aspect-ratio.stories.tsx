@@ -4,7 +4,6 @@ import { AspectRatio } from "./aspect-ratio";
 const meta: Meta<typeof AspectRatio> = {
   component: AspectRatio,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

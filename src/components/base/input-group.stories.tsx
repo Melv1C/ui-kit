@@ -22,7 +22,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 const meta: Meta<typeof InputGroup> = {
   component: InputGroup,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

@@ -30,7 +30,6 @@ import {
 const meta: Meta<typeof Item> = {
   component: Item,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

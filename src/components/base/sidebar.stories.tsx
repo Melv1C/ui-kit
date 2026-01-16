@@ -6,7 +6,6 @@ import { SidebarProvider } from "./sidebar";
 const meta: Meta<typeof SidebarProvider> = {
   component: SidebarProvider,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

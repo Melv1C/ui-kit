@@ -14,7 +14,6 @@ import {
 const meta: Meta<typeof Drawer> = {
   component: Drawer,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

@@ -9,7 +9,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 const meta: Meta<typeof Kbd> = {
   component: Kbd,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

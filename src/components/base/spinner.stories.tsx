@@ -32,7 +32,6 @@ import { Spinner } from "./spinner";
 const meta: Meta<typeof Spinner> = {
   component: Spinner,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

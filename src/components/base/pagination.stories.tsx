@@ -12,7 +12,6 @@ import {
 const meta: Meta<typeof Pagination> = {
   component: Pagination,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

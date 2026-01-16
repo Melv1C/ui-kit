@@ -8,7 +8,6 @@ import {
 const meta: Meta<typeof ResizablePanelGroup> = {
   component: ResizablePanelGroup,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

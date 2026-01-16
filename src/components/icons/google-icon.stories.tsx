@@ -4,7 +4,6 @@ import { GoogleIcon } from "./google-icon";
 const meta: Meta<typeof GoogleIcon> = {
   component: GoogleIcon,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

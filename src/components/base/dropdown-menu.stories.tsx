@@ -32,7 +32,6 @@ import {
 const meta: Meta<typeof DropdownMenu> = {
   component: DropdownMenu,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

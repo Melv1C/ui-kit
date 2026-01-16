@@ -3,9 +3,7 @@ import { NextButton, PreviousButton } from "./buttons";
 
 const meta: Meta<typeof NextButton> = {
   component: NextButton,
-  parameters: {
-    layout: "centered",
-  },
+  parameters: {},
   tags: ["autodocs"],
   argTypes: {
     variant: {

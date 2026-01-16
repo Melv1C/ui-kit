@@ -6,7 +6,6 @@ import { Toaster } from "./sonner";
 const meta: Meta<typeof Toaster> = {
   component: Toaster,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

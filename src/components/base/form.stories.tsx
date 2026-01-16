@@ -18,7 +18,6 @@ import { Input } from "./input";
 const meta: Meta<typeof Form> = {
   component: Form,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `<div style="margin-bottom: 1rem; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 0.5rem; background-color: #f9fafb;">

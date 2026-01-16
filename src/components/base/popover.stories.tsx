@@ -7,7 +7,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 const meta: Meta<typeof Popover> = {
   component: Popover,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

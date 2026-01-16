@@ -13,7 +13,6 @@ import {
 const meta: Meta<typeof Empty> = {
   component: Empty,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

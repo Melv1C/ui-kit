@@ -4,7 +4,6 @@ import { AppleIcon } from "./apple-icon";
 const meta: Meta<typeof AppleIcon> = {
   component: AppleIcon,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

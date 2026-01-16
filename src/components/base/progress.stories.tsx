@@ -6,7 +6,6 @@ import { Progress } from "./progress";
 const meta: Meta<typeof Progress> = {
   component: Progress,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

@@ -18,7 +18,6 @@ import {
 const meta: Meta<typeof ContextMenu> = {
   component: ContextMenu,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

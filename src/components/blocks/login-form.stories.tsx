@@ -4,7 +4,6 @@ import { LoginForm } from "./login-form";
 const meta: Meta<typeof LoginForm> = {
   component: LoginForm,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

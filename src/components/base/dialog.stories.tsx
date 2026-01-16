@@ -19,7 +19,6 @@ type ExtendDialogContentProps = React.ComponentProps<typeof DialogContent> & {
 const meta: Meta<ExtendDialogContentProps> = {
   component: Dialog,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

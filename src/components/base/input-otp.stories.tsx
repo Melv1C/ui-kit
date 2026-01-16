@@ -24,7 +24,6 @@ import {
 const meta: Meta<typeof InputOTP> = {
   component: InputOTP,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

@@ -4,7 +4,6 @@ import { GithubIcon } from "./github-icon";
 const meta: Meta<typeof GithubIcon> = {
   component: GithubIcon,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

@@ -6,7 +6,6 @@ import { Label } from "./label";
 const meta: Meta<typeof Input> = {
   component: Input,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

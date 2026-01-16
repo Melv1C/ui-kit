@@ -12,7 +12,6 @@ import { ToggleGroup, ToggleGroupItem } from "./toggle-group";
 const meta: Meta<typeof ToggleGroup> = {
   component: ToggleGroup,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

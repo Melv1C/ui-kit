@@ -15,7 +15,6 @@ import { Label } from "./label";
 const meta: Meta<typeof Card> = {
   component: Card,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

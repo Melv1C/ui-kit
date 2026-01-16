@@ -12,7 +12,6 @@ import { Button } from "./button";
 const meta: Meta<typeof Accordion> = {
   component: Accordion,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `
@@ -49,7 +48,7 @@ type Story = StoryObj<typeof Accordion>;
 
 export const Default: Story = {
   render: (args) => (
-    <Accordion {...args} className="w-[400px]">
+    <Accordion {...args} className="w-100">
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>

@@ -5,7 +5,6 @@ import { Separator } from "./separator";
 const meta: Meta<typeof ScrollArea> = {
   component: ScrollArea,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `

@@ -5,7 +5,6 @@ import { Alert, AlertDescription, AlertTitle } from "./alert";
 const meta: Meta<typeof Alert> = {
   component: Alert,
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component: `
