@@ -38,5 +38,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish to npm
-        run: npm publish
+      #  Disabled publishing step for now as I wasn't able to pucblish successfully though GH actions
+      # - name: Publish to npm
+      #   run: npm publish
