@@ -1,2 +1,1 @@
-export * from "./locale-provider";
-export * from "./translation-provider";
+export * from "./ui-kit-provider";
