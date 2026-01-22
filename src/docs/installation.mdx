@@ -57,7 +57,21 @@ Import the base styles and a theme in your main CSS file:
 @import "@melv1c/ui-kit/themes/vibrant.css";
 ```
 
-### 3. Use Components
+### 3. Wrap Your App with UIKitProvider
+
+```tsx
+import { UIKitProvider } from "@melv1c/ui-kit/providers";
+
+function App() {
+  return (
+    <UIKitProvider i18nConfig={{ locale: "en" }}>
+      {/* Your app */}
+    </UIKitProvider>
+  );
+}
+```
+
+### 4. Use Components
 
 ```tsx
 import { Button, Card } from "@melv1c/ui-kit";
@@ -79,7 +93,15 @@ function App() {
 - **exotic.css** — Vibrant theme with coral and blue accents
 - **vibrant.css** — Colorful theme with purple and yellow accents
 
+## UIKitProvider Options
+
+| Option             | Type      | Default            | Description                                                                                            |
+| ------------------ | --------- | ------------------ | ------------------------------------------------------------------------------------------------------ |
+| `hasToaster`       | boolean   | `true`             | Include the toast notification component                                                               |
+| `i18nConfig`       | object    | `{ locale: "en" }` | i18n configuration (see [Internationalization](/?path=/docs/documentation-internationalisation--docs)) |
+| `loadingComponent` | ReactNode | `null`             | Component to show while initializing i18n                                                              |
+
 ## Next steps
 
 - 🎨 [Theming](/?path=/docs/documentation-theming--docs) — Customize colors
-- 🌍 [Internationalization](/?path=/docs/documentation-internationalisation--docs) — Add multiple languages
+- 🌍 [Internationalization](/?path=/docs/documentation-internationalisation--docs) — Configure languages

@@ -25,18 +25,22 @@ npm i i18next react-i18next
 
 ---
 
-## Choose Your Setup
+## Configuration
 
-### Option 1: Single Language (LocaleProvider)
+Wrap your app with `UIKitProvider` to enable UI kit translations. It supports two modes:
 
-For apps that only need one language and don't have an existing i18n setup:
+### Mode 1: Single Language (Locale Mode)
+
+For apps that only need one language:
 
 ```jsx
-import { LocaleProvider } from "@melv1c/ui-kit/providers";
+import { UIKitProvider } from "@melv1c/ui-kit/providers";
 
 function App() {
   return (
-    <LocaleProvider language="fr">{/* Your app in French */}</LocaleProvider>
+    <UIKitProvider i18nConfig={{ locale: "fr" }}>
+      {/* Your app in French */}
+    </UIKitProvider>
   );
 }
 ```
@@ -44,14 +48,19 @@ function App() {
 #### Override translations
 
 ```jsx
-<LocaleProvider language="fr" overrides={{ next: "Avancer" }}>
+<UIKitProvider
+  i18nConfig={{
+    locale: "fr",
+    overrides: { next: "Avancer" },
+  }}
+>
   {/* ... */}
-</LocaleProvider>
+</UIKitProvider>
 ```
 
 ---
 
-### Option 2: Full i18n (TranslationProvider)
+### Mode 2: Multiple Languages (i18n Instance Mode)
 
 For apps with an existing i18n setup that need multiple languages:
 
@@ -70,61 +79,41 @@ i18n.use(initReactI18next).init({
 });
 ```
 
-#### 2. Wrap your app with TranslationProvider
+#### 2. Wrap your app with UIKitProvider
 
 ```jsx
-import { TranslationProvider } from "@melv1c/ui-kit/providers";
+import { UIKitProvider } from "@melv1c/ui-kit/providers";
 
 function App() {
   return (
-    <TranslationProvider i18n={i18n}>
+    <UIKitProvider i18nConfig={{ instance: i18n }}>
       {/* Your multilingual app */}
-    </TranslationProvider>
+    </UIKitProvider>
   );
 }
 ```
 
-The `TranslationProvider` automatically adds all UI kit translations under the `ui` namespace.
+The `UIKitProvider` automatically adds all UI kit translations under the `ui` namespace for all supported languages.
 
 #### Override or extend translations
 
 ```jsx
-<TranslationProvider
-  i18n={i18n}
-  overrides={{
-    // Override existing language
-    fr: { next: "Avancer" },
-    // Add unsupported language
-    ru: { next: "Следующий", previous: "Предыдущий" },
+<UIKitProvider
+  i18nConfig={{
+    instance: i18n,
+    overrides: {
+      // Override existing language
+      fr: { next: "Avancer" },
+      // Add unsupported language
+      ru: { next: "Следующий", previous: "Предыдущий" },
+    },
   }}
 >
   {/* ... */}
-</TranslationProvider>
+</UIKitProvider>
 ```
 
 ---
-
-### Option 3: Manual Setup
-
-For full control, import locale files directly:
-
-```javascript
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import { en as uiEn, fr as uiFr } from "@melv1c/ui-kit/locales";
-
-i18n.use(initReactI18next).init({
-  lng: "en",
-  fallbackLng: "en",
-  resources: {
-    en: { ui: uiEn },
-    fr: { ui: uiFr },
-  },
-  interpolation: {
-    escapeValue: false,
-  },
-});
-```
 
 ---
 
