@@ -12,6 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { CalendarIcon, XIcon } from "lucide-react";
 import { useEffect, useState, type ChangeEvent } from "react";
+import type { DayPicker } from "react-day-picker";
 
 export interface DateTimePickerProps {
   /**
@@ -35,9 +36,15 @@ export interface DateTimePickerProps {
    */
   showClear?: boolean;
   /**
-   * Disable the picker
+   * Disable the entire picker
    */
   disabled?: boolean;
+  /**
+   * Apply the disabled modifier to matching days.
+   * Supports Date, Date[], DateRange, DateBefore, DateAfter, DateInterval, DayOfWeek, or a function.
+   * @see https://daypicker.dev/selections/disabling-dates
+   */
+  disabledDates?: React.ComponentProps<typeof DayPicker>["disabled"];
   /**
    * Custom className for the container
    */
@@ -55,6 +62,7 @@ function DateTimePicker({
   placeholder = "Select date and time",
   showClear = true,
   disabled = false,
+  disabledDates,
   className,
   formatDateTime,
 }: DateTimePickerProps) {
@@ -166,7 +174,7 @@ function DateTimePicker({
             selected={date}
             captionLayout="dropdown"
             onSelect={handleDateChange}
-            disabled={disabled}
+            disabled={disabledDates}
           />
           <div className="border-t p-3">
             <Label htmlFor="time-input" className="mb-2 block text-xs">
@@ -178,7 +186,7 @@ function DateTimePicker({
               step="60"
               value={formatTimeValue(date)}
               onChange={handleTimeChange}
-              disabled={disabled}
+              disabled={!date || disabled}
               className="bg-background h-8 appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
             />
           </div>

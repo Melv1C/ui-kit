@@ -104,3 +104,34 @@ export const WithoutClear: Story = {
     );
   },
 };
+
+export const WithMinMaxConstraints: Story = {
+  render: () => {
+    const [value, setValue] = useState<Date | undefined>();
+
+    // Set min date to today
+    const minDate = new Date();
+    minDate.setHours(0, 0, 0, 0);
+
+    // Set max date to 30 days from now
+    const maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + 30);
+
+    return (
+      <div className="w-80">
+        <DateTimePicker
+          value={value}
+          onChange={setValue}
+          label="Book an appointment"
+          placeholder="Select a date (next 30 days)"
+          disabledDates={[{ before: minDate }, { after: maxDate }]}
+        />
+        <div className="text-muted-foreground mt-4 space-y-1 text-sm">
+          <div>Selected: {value?.toString() ?? "None"}</div>
+          <div>Min: {minDate.toLocaleDateString()}</div>
+          <div>Max: {maxDate.toLocaleDateString()}</div>
+        </div>
+      </div>
+    );
+  },
+};
