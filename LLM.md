@@ -19,7 +19,12 @@ import "@melv1c/ui-kit/themes/default.css";
 ### Accordion
 
 ```tsx
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@melv1c/ui-kit";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@melv1c/ui-kit";
 
 <Accordion type="single" collapsible>
   <AccordionItem value="item-1">
@@ -60,7 +65,9 @@ import {
   <AlertDialogContent>
     <AlertDialogHeader>
       <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-      <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
+      <AlertDialogDescription>
+        This action cannot be undone.
+      </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
       <AlertDialogCancel>Cancel</AlertDialogCancel>
@@ -144,7 +151,15 @@ import { Calendar } from "@melv1c/ui-kit";
 ### Card
 
 ```tsx
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Button } from "@melv1c/ui-kit";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  Button,
+} from "@melv1c/ui-kit";
 
 <Card>
   <CardHeader>
@@ -161,7 +176,13 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, 
 ### Carousel
 
 ```tsx
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@melv1c/ui-kit";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@melv1c/ui-kit";
 
 <Carousel>
   <CarouselContent>
@@ -184,7 +205,11 @@ import { Checkbox } from "@melv1c/ui-kit";
 ### Collapsible
 
 ```tsx
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@melv1c/ui-kit";
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@melv1c/ui-kit";
 
 <Collapsible>
   <CollapsibleTrigger>Toggle</CollapsibleTrigger>
@@ -195,7 +220,12 @@ import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@melv1c/ui-
 ### Command
 
 ```tsx
-import { Command, CommandInput, CommandList, CommandItem } from "@melv1c/ui-kit";
+import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandItem,
+} from "@melv1c/ui-kit";
 
 <Command>
   <CommandInput placeholder="Search..." />
@@ -208,7 +238,12 @@ import { Command, CommandInput, CommandList, CommandItem } from "@melv1c/ui-kit"
 ### ContextMenu
 
 ```tsx
-import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem } from "@melv1c/ui-kit";
+import {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+} from "@melv1c/ui-kit";
 
 <ContextMenu>
   <ContextMenuTrigger>Right click me</ContextMenuTrigger>
@@ -221,7 +256,14 @@ import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem } 
 ### Dialog
 
 ```tsx
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@melv1c/ui-kit";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@melv1c/ui-kit";
 
 <Dialog>
   <DialogTrigger>Open</DialogTrigger>
@@ -237,7 +279,13 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 ### Drawer
 
 ```tsx
-import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle } from "@melv1c/ui-kit";
+import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+} from "@melv1c/ui-kit";
 
 <Drawer>
   <DrawerTrigger>Open drawer</DrawerTrigger>
@@ -252,7 +300,12 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle } from 
 ### DropdownMenu
 
 ```tsx
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@melv1c/ui-kit";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@melv1c/ui-kit";
 
 <DropdownMenu>
   <DropdownMenuTrigger>Open</DropdownMenuTrigger>
@@ -265,7 +318,15 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 ### Form
 
 ```tsx
-import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage, Input } from "@melv1c/ui-kit";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+  Input,
+} from "@melv1c/ui-kit";
 
 <Form {...form}>
   <FormField
@@ -317,7 +378,13 @@ import { Label, Input } from "@melv1c/ui-kit";
 ### Menubar
 
 ```tsx
-import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem } from "@melv1c/ui-kit";
+import {
+  Menubar,
+  MenubarMenu,
+  MenubarTrigger,
+  MenubarContent,
+  MenubarItem,
+} from "@melv1c/ui-kit";
 
 <Menubar>
   <MenubarMenu>
@@ -332,7 +399,13 @@ import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem } fro
 ### NavigationMenu
 
 ```tsx
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent } from "@melv1c/ui-kit";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+} from "@melv1c/ui-kit";
 
 <NavigationMenu>
   <NavigationMenuList>
@@ -347,7 +420,14 @@ import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuT
 ### Pagination
 
 ```tsx
-import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationNext } from "@melv1c/ui-kit";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationPrevious,
+  PaginationLink,
+  PaginationNext,
+} from "@melv1c/ui-kit";
 
 <Pagination>
   <PaginationContent>
@@ -409,7 +489,13 @@ import { ScrollArea } from "@melv1c/ui-kit";
 ### Select
 
 ```tsx
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@melv1c/ui-kit";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@melv1c/ui-kit";
 
 <Select>
   <SelectTrigger>
@@ -432,7 +518,13 @@ import { Separator } from "@melv1c/ui-kit";
 ### Sheet
 
 ```tsx
-import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@melv1c/ui-kit";
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@melv1c/ui-kit";
 
 <Sheet>
   <SheetTrigger>Open</SheetTrigger>
@@ -447,7 +539,14 @@ import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@mel
 ### Sidebar
 
 ```tsx
-import { SidebarProvider, Sidebar, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@melv1c/ui-kit";
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+} from "@melv1c/ui-kit";
 
 <SidebarProvider>
   <Sidebar>
@@ -497,7 +596,14 @@ import { Switch } from "@melv1c/ui-kit";
 ### Table
 
 ```tsx
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@melv1c/ui-kit";
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@melv1c/ui-kit";
 
 <Table>
   <TableHeader>
@@ -558,7 +664,12 @@ import { ToggleGroup, ToggleGroupItem } from "@melv1c/ui-kit";
 ### Tooltip
 
 ```tsx
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@melv1c/ui-kit";
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@melv1c/ui-kit";
 
 <TooltipProvider>
   <Tooltip>
@@ -602,7 +713,13 @@ import { DateTimePicker } from "@melv1c/ui-kit";
 ## Icons (`@melv1c/ui-kit`)
 
 ```tsx
-import { AppleIcon, FacebookIcon, GithubIcon, GoogleIcon, MicrosoftIcon } from "@melv1c/ui-kit";
+import {
+  AppleIcon,
+  FacebookIcon,
+  GithubIcon,
+  GoogleIcon,
+  MicrosoftIcon,
+} from "@melv1c/ui-kit";
 
 <div className="flex gap-2">
   <AppleIcon />
@@ -629,7 +746,11 @@ import { UIKitProvider } from "@melv1c/ui-kit";
 import { CodeEditor, CodeDiffEditor } from "@melv1c/ui-kit/code-editors";
 
 <CodeEditor language="typescript" value={"const x = 1;"} onChange={() => {}} />;
-<CodeDiffEditor original="const x = 1;" modified="const x = 2;" language="typescript" />;
+<CodeDiffEditor
+  original="const x = 1;"
+  modified="const x = 2;"
+  language="typescript"
+/>;
 ```
 
 ### Rich Text Editor (`@melv1c/ui-kit/rich-text-editor`)
