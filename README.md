@@ -23,13 +23,13 @@ This library provides a collection of reusable, accessible UI components that fo
 ### Prerequisites
 
 - Node.js 22+
-- npm
+- Bun
 
 ### Setup
 
 ```bash
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 This starts the Storybook dev server on `http://localhost:6006`.
