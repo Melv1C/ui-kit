@@ -2,7 +2,7 @@ import * as locales from "@/locales";
 import type { SupportedLanguage } from "@/types";
 import type { i18n as I18nInstance } from "i18next";
 import i18n from "i18next";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import { Toaster } from "../base";
 
@@ -41,10 +41,14 @@ export function UIKitProvider({
   i18nConfig = { locale: "en" },
   loadingComponent = null,
 }: ProviderProps) {
-  const [isReady, setIsReady] = useState(false);
+  const [localInstance] = useState(() =>
+    !i18nConfig.instance ? i18n.createInstance() : null,
+  );
+  const instance = i18nConfig.instance || localInstance!;
 
-  const i18nRef = useRef(!i18nConfig.instance ? i18n.createInstance() : null);
-  const instance = i18nConfig.instance || i18nRef.current!;
+  const [isReady, setIsReady] = useState(
+    () => !(i18nConfig.locale && !instance.isInitialized),
+  );
 
   useEffect(() => {
     if (i18nConfig.locale && !instance.isInitialized) {
@@ -62,8 +66,6 @@ export function UIKitProvider({
         .then(() => {
           setIsReady(true);
         });
-    } else {
-      setIsReady(true);
     }
   }, [i18nConfig, instance]);
 
