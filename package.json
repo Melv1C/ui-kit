@@ -38,7 +38,7 @@
   },
   "files": [
     "dist",
-    "AI_COMPONENT_USAGE.md"
+    "LLM.md"
   ],
   "sideEffects": false,
   "scripts": {
