@@ -1,7 +1,17 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
-import { RichTextEditor } from "./rich-text-editor";
+import * as React from "react";
+import {
+  EditorActionButton,
+  EditorBubbleMenu,
+  EditorBubbleMenuSeparator,
+  EditorContent,
+  EditorRoot,
+  EditorToolbarComposable,
+  EditorToolbarGroup,
+  EditorToolbarSeparator,
+  RichTextEditor,
+  type RichTextEditorProps,
+} from "./rich-text-editor";
 
 const meta: Meta<typeof RichTextEditor> = {
   component: RichTextEditor,
@@ -9,18 +19,12 @@ const meta: Meta<typeof RichTextEditor> = {
     layout: "padded",
     docs: {
       description: {
-        component: `A rich text editor component built with TipTap.
+        component: `A TipTap rich text editor with two APIs:
 
-**Features:**
-- Bold, italic, underline, strikethrough formatting
-- Bullet and ordered lists
-- Link insertion and editing
-- Placeholder text support
-- HTML output
-- Responsive and mobile-friendly
+- **Quick API** via \`RichTextEditor\`
+- **Composable API** via \`EditorRoot\`, \`EditorToolbarComposable\`, \`EditorActionButton\`, and \`EditorContent\`.
 
-**Installation:**
-This component requires TipTap dependencies as peer dependencies. Install them in your project:
+**Install peer dependencies:**
 
 \`\`\`bash
 npm install @tiptap/react @tiptap/starter-kit @tiptap/extension-underline @tiptap/extension-link @tiptap/extension-placeholder
@@ -29,13 +33,11 @@ bun add @tiptap/react @tiptap/starter-kit @tiptap/extension-underline @tiptap/ex
 \`\`\`
 
 **Import:**
-TipTap is lazy-loaded automatically when used:
 
 \`\`\`tsx
-import { RichTextEditor } from "@melv1c/ui-kit";
-\`\`\`
-
-See [TipTap docs](https://tiptap.dev/docs)`,
+import { RichTextEditor } from "@melv1c/ui-kit/rich-text-editor";
+// or composable imports from the same package path
+\`\`\``,
       },
     },
   },
@@ -81,181 +83,151 @@ const defaultContent = `<p>This is a <strong>rich text editor</strong> with <em>
 </ul>
 <p>You can also add <a href="https://example.com" target="_blank">links</a> to your content.</p>`;
 
-export const Default: Story = {
-  render: (props) => {
-    const [value, setValue] = useState(defaultContent);
-    return (
-      <div className="space-y-4">
-        <RichTextEditor {...props} value={value} onChange={setValue} />
-        <div className="rounded-md border p-4">
-          <p className="text-muted-foreground mb-2 text-sm font-medium">
-            HTML Output:
-          </p>
-          <pre className="text-muted-foreground text-xs whitespace-pre-wrap">
-            {value || "(empty)"}
-          </pre>
-        </div>
+const workspaceInitialContent = `<h1>Welcome to Workspace</h1>
+<p>Start writing your content here. Use the toolbar to format text and structure your content.</p>
+<h2>Getting Started</h2>
+<ul>
+  <li><strong>Use formatting</strong> from the toolbar buttons</li>
+  <li><strong>Add headings</strong> to structure your sections</li>
+  <li><strong>Build lists</strong> with ordered and unordered list controls</li>
+  <li><strong>Edit links</strong> directly from the toolbar</li>
+</ul>`;
+
+function QuickEditorPreview(props: RichTextEditorProps) {
+  const [value, setValue] = React.useState(defaultContent);
+
+  return (
+    <div className="space-y-4">
+      <RichTextEditor {...props} value={value} onChange={setValue} />
+      <div className="rounded-md border p-4">
+        <p className="text-muted-foreground mb-2 text-sm font-medium">
+          HTML Output:
+        </p>
+        <pre className="text-muted-foreground text-xs whitespace-pre-wrap">
+          {value || "(empty)"}
+        </pre>
       </div>
-    );
-  },
+    </div>
+  );
+}
+
+function ComposableEditorPreview() {
+  const [content, setContent] = React.useState(workspaceInitialContent);
+
+  return (
+    <div className="space-y-4">
+      <div className="h-[560px] overflow-hidden rounded-md border">
+        <EditorRoot
+          content={content}
+          onChange={setContent}
+          className="flex h-full min-h-0 flex-col rounded-none border-0 focus-within:ring-0"
+        >
+          <EditorToolbarComposable>
+            <EditorToolbarGroup>
+              <EditorActionButton action="bold" />
+              <EditorActionButton action="italic" />
+              <EditorActionButton action="underline" />
+              <EditorActionButton action="strike" />
+              <EditorActionButton action="code" />
+            </EditorToolbarGroup>
+
+            <EditorToolbarSeparator />
+
+            <EditorToolbarGroup>
+              <EditorActionButton action="h1" />
+              <EditorActionButton action="h2" />
+              <EditorActionButton action="h3" />
+            </EditorToolbarGroup>
+
+            <EditorToolbarSeparator />
+
+            <EditorToolbarGroup>
+              <EditorActionButton action="bulletList" />
+              <EditorActionButton action="orderedList" />
+            </EditorToolbarGroup>
+
+            <EditorToolbarSeparator />
+
+            <EditorToolbarGroup>
+              <EditorActionButton action="codeBlock" />
+              <EditorActionButton action="link" />
+              <EditorActionButton action="horizontalRule" />
+            </EditorToolbarGroup>
+
+            <EditorToolbarSeparator />
+
+            <EditorToolbarGroup>
+              <EditorActionButton action="undo" />
+              <EditorActionButton action="redo" />
+            </EditorToolbarGroup>
+          </EditorToolbarComposable>
+
+          <div className="flex-1 overflow-auto">
+            <EditorBubbleMenu>
+              <EditorActionButton action="bold" />
+              <EditorActionButton action="italic" />
+              <EditorActionButton action="underline" />
+              <EditorActionButton action="strike" />
+              <EditorBubbleMenuSeparator />
+              <EditorActionButton action="link" />
+            </EditorBubbleMenu>
+            <EditorContent placeholder="Start writing your content..." />
+          </div>
+        </EditorRoot>
+      </div>
+
+      <div className="rounded-md border p-4">
+        <p className="text-muted-foreground mb-2 text-sm font-medium">
+          HTML Output:
+        </p>
+        <pre className="text-muted-foreground text-xs whitespace-pre-wrap">
+          {content || "(empty)"}
+        </pre>
+      </div>
+    </div>
+  );
+}
+
+function ReadOnlyPreview() {
+  const [value, setValue] = React.useState(defaultContent);
+  return <RichTextEditor readOnly value={value} onChange={setValue} />;
+}
+
+function MinimalToolbarPreview() {
+  const [value, setValue] = React.useState(
+    "<p>A minimal editor with only basic formatting.</p>",
+  );
+
+  return (
+    <RichTextEditor
+      value={value}
+      onChange={setValue}
+      toolbarOptions={{
+        headings: false,
+        bold: true,
+        italic: true,
+        underline: false,
+        strikethrough: false,
+        bulletList: false,
+        orderedList: false,
+        link: false,
+      }}
+    />
+  );
+}
+
+export const Default: Story = {
+  render: (props) => <QuickEditorPreview {...props} />,
 };
 
-export const Empty: Story = {
-  render: (_) => {
-    const [value, setValue] = useState("");
-    return (
-      <RichTextEditor
-        placeholder="Write something amazing..."
-        value={value}
-        onChange={setValue}
-      />
-    );
-  },
+export const Composable: Story = {
+  render: () => <ComposableEditorPreview />,
 };
 
 export const ReadOnly: Story = {
-  render: (_) => {
-    const [value, setValue] = useState(defaultContent);
-    return <RichTextEditor readOnly value={value} onChange={setValue} />;
-  },
-};
-
-export const Disabled: Story = {
-  render: (_) => {
-    const [value, setValue] = useState(defaultContent);
-    return <RichTextEditor disabled value={value} onChange={setValue} />;
-  },
-};
-
-export const SmallSize: Story = {
-  render: (_) => {
-    const [value, setValue] = useState(defaultContent);
-    return (
-      <RichTextEditor
-        size="sm"
-        placeholder="Compact editor..."
-        value={value}
-        onChange={setValue}
-      />
-    );
-  },
-};
-
-export const LargeSize: Story = {
-  render: (_) => {
-    const [value, setValue] = useState(defaultContent);
-    return (
-      <RichTextEditor
-        size="lg"
-        placeholder="Large editor for more content..."
-        value={value}
-        onChange={setValue}
-      />
-    );
-  },
-};
-
-export const CardVariant: Story = {
-  render: (_) => {
-    const [value, setValue] = useState(defaultContent);
-    return <RichTextEditor variant="card" value={value} onChange={setValue} />;
-  },
-};
-
-export const SingleLine: Story = {
-  render: (_) => {
-    const [value, setValue] = useState(
-      "<p>Single line input - Enter key is disabled</p>",
-    );
-    return (
-      <RichTextEditor
-        multiline={false}
-        placeholder="Type here (no line breaks allowed)..."
-        value={value}
-        onChange={setValue}
-      />
-    );
-  },
-};
-
-export const CustomToolbarOptions: Story = {
-  render: (_) => {
-    const [value, setValue] = useState(
-      "<p>This editor only has <strong>bold</strong>, <em>italic</em>, and links enabled.</p>",
-    );
-    return (
-      <div className="space-y-4">
-        <p className="text-muted-foreground text-sm">
-          Only bold, italic, and link options are enabled:
-        </p>
-        <RichTextEditor
-          value={value}
-          onChange={setValue}
-          toolbarOptions={{
-            headings: false,
-            bold: true,
-            italic: true,
-            underline: false,
-            strikethrough: false,
-            bulletList: false,
-            orderedList: false,
-            link: true,
-          }}
-        />
-      </div>
-    );
-  },
+  render: () => <ReadOnlyPreview />,
 };
 
 export const MinimalToolbar: Story = {
-  render: (_) => {
-    const [value, setValue] = useState(
-      "<p>A minimal editor with only basic formatting.</p>",
-    );
-    return (
-      <div className="space-y-4">
-        <p className="text-muted-foreground text-sm">
-          Only bold and italic options enabled (no headings, lists, or links):
-        </p>
-        <RichTextEditor
-          value={value}
-          onChange={setValue}
-          toolbarOptions={{
-            headings: false,
-            bold: true,
-            italic: true,
-            underline: false,
-            strikethrough: false,
-            bulletList: false,
-            orderedList: false,
-            link: false,
-          }}
-        />
-      </div>
-    );
-  },
-};
-
-export const FormattingOnly: Story = {
-  render: (_) => {
-    const [value, setValue] = useState(
-      "<p>This editor has all text formatting but no headings or lists.</p>",
-    );
-    return (
-      <div className="space-y-4">
-        <p className="text-muted-foreground text-sm">
-          All text formatting options but no headings or lists:
-        </p>
-        <RichTextEditor
-          value={value}
-          onChange={setValue}
-          toolbarOptions={{
-            headings: false,
-            bulletList: false,
-            orderedList: false,
-          }}
-        />
-      </div>
-    );
-  },
+  render: () => <MinimalToolbarPreview />,
 };
